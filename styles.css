@@ -92,12 +92,12 @@ h1, h2, h3, p { margin-top: 0; }
 .button-primary span { color: var(--lime); font-size: 17px; }
 .text-link, .underlined-link { display: inline-flex; align-items: center; gap: 11px; border-bottom: 1px solid var(--line-strong); padding: 5px 0; font-size: 12px; font-weight: 700; }
 .text-link span, .underlined-link span { color: var(--green); font-size: 16px; }
-.hero-visual { min-height: 530px; position: relative; align-self: stretch; display: grid; place-items: center; overflow: clip; perspective: 1100px; background: radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 48%), rgba(114, 242, 208, .13), transparent 58%); animation: enter-up .85s .12s both; transition: background-position .2s ease; }
+.hero-visual { min-height: 530px; position: relative; align-self: stretch; display: grid; place-items: center; overflow: clip; perspective: 1100px; animation: enter-up .85s .12s both; }
 .hero-visual::before, .hero-visual::after { content: ''; position: absolute; z-index: 0; width: min(94%, 475px); aspect-ratio: 1; border: 1.5px solid color-mix(in srgb, var(--green) 42%, transparent); border-radius: 50%; pointer-events: none; }
 .hero-visual::before { transform: perspective(900px) rotateX(64deg) rotateZ(-18deg); animation: orbit-forward 24s linear infinite; }
 .hero-visual::after { width: min(82%, 410px); border: 2px dashed color-mix(in srgb, var(--coral) 75%, transparent); transform: perspective(900px) rotateY(62deg) rotateZ(24deg); animation: orbit-backward 31s linear infinite; }
-.portrait-backdrop { position: absolute; top: 10%; right: 4%; width: min(84%, 410px); aspect-ratio: 1; border-radius: 50%; background: var(--lime); transform: rotate(-13deg); box-shadow: 0 18px 55px color-mix(in srgb, var(--lime) 20%, transparent); animation: backdrop-breathe 6s ease-in-out infinite; }
-.portrait-frame { position: relative; z-index: 1; width: min(78%, 390px); aspect-ratio: 1; margin: 32px 0 0 20px; overflow: hidden; border: 8px solid var(--white); border-radius: 50%; background: var(--paper-deep); box-shadow: 0 0 0 2px color-mix(in srgb, var(--green) 30%, transparent), 0 24px 62px rgba(4, 5, 18, .4); transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateZ(0); transform-style: preserve-3d; transition: transform .22s ease-out, box-shadow .3s ease; will-change: transform; }
+.portrait-backdrop { position: absolute; z-index: 1; top: 50%; left: 50%; width: min(86%, 430px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--lime) 30%, transparent) 0%, color-mix(in srgb, var(--green) 18%, transparent) 48%, transparent 72%); filter: blur(7px); pointer-events: none; transform: translate(-50%, -50%); animation: portrait-glow 5s ease-in-out infinite; }
+.portrait-frame { position: relative; z-index: 1; width: min(78%, 390px); aspect-ratio: 1; margin: 12px 0 0 20px; overflow: hidden; border: 8px solid var(--white); border-radius: 50%; background: var(--paper-deep); box-shadow: 0 0 0 2px color-mix(in srgb, var(--green) 30%, transparent), 0 24px 62px rgba(4, 5, 18, .4); transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateZ(0); transform-style: preserve-3d; transition: transform .22s ease-out, box-shadow .3s ease; will-change: transform; }
 .hero-visual:hover .portrait-frame { box-shadow: 0 0 0 2px color-mix(in srgb, var(--lime) 50%, transparent), 0 32px 76px rgba(4, 5, 18, .5); }
 .portrait-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 27%; }
 .orbit-note { position: absolute; z-index: 2; display: flex; align-items: center; gap: 10px; border: 1px solid color-mix(in srgb, var(--green) 24%, transparent); border-radius: 3px; box-shadow: 0 8px 26px rgba(4, 5, 18, .3); animation: note-float 5s ease-in-out infinite; }
@@ -207,7 +207,7 @@ h1, h2, h3, p { margin-top: 0; }
 @keyframes status-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--coral) 65%, transparent); } 70%, 100% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--coral) 0%, transparent); } }
 @keyframes orbit-forward { to { transform: perspective(900px) rotateX(64deg) rotateZ(342deg); } }
 @keyframes orbit-backward { to { transform: perspective(900px) rotateY(62deg) rotateZ(-336deg); } }
-@keyframes backdrop-breathe { 0%, 100% { transform: rotate(-13deg) scale(1); } 50% { transform: rotate(-8deg) scale(1.035); } }
+@keyframes portrait-glow { 0%, 100% { opacity: .72; scale: .94; } 50% { opacity: 1; scale: 1.04; } }
 @keyframes stamp-sway { 0%, 100% { rotate: -9deg; } 50% { rotate: -5deg; } }
 
 @media (min-width: 1400px) { .hero { min-height: 760px; } }
@@ -217,7 +217,6 @@ h1, h2, h3, p { margin-top: 0; }
   .hero h1 { font-size: clamp(52px, 8vw, 70px); }
   .hero-visual { min-height: 490px; }
   .portrait-frame { width: 82%; }
-  .portrait-backdrop { width: 82%; }
   .orbit-note-top { right: -4px; }
   .proof-grid { grid-template-columns: 1.1fr repeat(3, 1fr); gap: 12px; }
   .proof-stat { padding-left: 13px; }
@@ -247,8 +246,7 @@ h1, h2, h3, p { margin-top: 0; }
   .hero-visual { min-height: 420px; margin-top: 12px; }
   .hero-visual::before { width: 96%; }
   .hero-visual::after { width: 84%; }
-  .portrait-backdrop { top: 8%; right: 7%; width: 78%; }
-  .portrait-frame { width: 73%; margin: 35px 0 0; }
+  .portrait-frame { width: 73%; margin: 15px 0 0; }
   .orbit-note-top { top: 68px; right: 0; }
   .orbit-note-bottom { bottom: 35px; left: 0; }
   .visual-caption { bottom: 8px; right: 0; }

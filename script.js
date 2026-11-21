@@ -146,15 +146,11 @@ if (portraitStage && portrait && !reducedMotion && window.matchMedia('(pointer: 
     const bounds = portraitStage.getBoundingClientRect();
     const horizontal = (event.clientX - bounds.left) / bounds.width - 0.5;
     const vertical = (event.clientY - bounds.top) / bounds.height - 0.5;
-    portraitStage.style.setProperty('--glow-x', `${(horizontal + 0.5) * 100}%`);
-    portraitStage.style.setProperty('--glow-y', `${(vertical + 0.5) * 100}%`);
     portrait.style.setProperty('--tilt-x', `${-vertical * 9}deg`);
     portrait.style.setProperty('--tilt-y', `${horizontal * 10}deg`);
   });
 
   portraitStage.addEventListener('pointerleave', () => {
-    portraitStage.style.setProperty('--glow-x', '50%');
-    portraitStage.style.setProperty('--glow-y', '48%');
     portrait.style.setProperty('--tilt-x', '0deg');
     portrait.style.setProperty('--tilt-y', '0deg');
   });
